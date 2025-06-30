@@ -12,7 +12,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Demo: Dashboard - Analytics | Sneat - Bootstrap Dashboard FREE</title>
+    <title>Dashboard</title>
 
     <meta name="description" content="" />
 
@@ -130,8 +130,7 @@
             <li class="menu-item active open">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
-                <span class="badge rounded-pill bg-danger ms-auto">5</span>
+                <div class="text-truncate" data-i18n="Dashboards">Dashboard</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item active">
@@ -182,7 +181,7 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div class="text-truncate" data-i18n="Layouts">Layouts</div>
+                <div class="text-truncate" data-i18n="Layouts">Surat Masuk</div>
               </a>
 
               <ul class="menu-sub">
@@ -218,8 +217,7 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-store"></i>
-                <div class="text-truncate" data-i18n="Front Pages">Front Pages</div>
-                <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">Pro</div>
+                <div class="text-truncate" data-i18n="Front Pages">Surat Keluar</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
