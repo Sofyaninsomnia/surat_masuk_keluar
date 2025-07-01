@@ -87,11 +87,13 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
 
 
-
                         <!-- Total Revenue -->
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title"><h3>Surat Keluar</h3></div>
+                                <div class="card-title">
+                                    <h3>Surat Masuk</h3>
+                                </div>
+                                <button class="btn btn-primary mb-2">Tambah</button>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -106,19 +108,9 @@
                                             <th scope="row">1</th>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>@twitter</td>
+                                            <td><button class="btn btn-sm btn-danger"><i class="bx bx-trash"></i></button>
+                                                <button class="btn btn-sm btn-info"><i class="bx bx-edit"></i></button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
