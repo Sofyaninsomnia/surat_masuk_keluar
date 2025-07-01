@@ -93,27 +93,38 @@
                                 <div class="card-title">
                                     <h3>Surat Masuk</h3>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#basicModal">
                                     Tambah
                                 </button>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Judul</th>
+                                            <th scope="col">Deskripsi</th>
+                                            <th scope="col">Pengirim</th>
+                                            <th scope="col">Tujuan</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        foreach ($surat_masuk as $sm): ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $sm->judul ?></td>
+                                                <td><?php echo $sm->deskripsi ?></td>
+                                                <td><?php echo $sm->pengirim ?></td>
+                                                <td><?php echo $sm->tujuan ?></td>
+                                                <td><?php echo $sm->tanggal ?></td>
+                                                <td><a href="<?php echo base_url('index.php/Surat_masuk/hapus/' . $sm->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus kategori ini?');"><i class="bx bx-trash"></i></a>
+                                                    <a href="<?php echo base_url('index.php/Surat_masuk/edit/' . $sm->id); ?>" class="btn btn-sm btn-info"><i class="bx bx-edit"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                <button class="btn btn-primary mb-2">Tambah</button>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -136,20 +147,58 @@
                                 </table>
                             </div>
                         </div>
-                        <!--/ Total Revenue -->
-
+                        <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Tambah surat masuk</h5>
+                                        <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form action="<?php echo base_url('index.php/Surat_masuk/tambah'); ?>" method="post">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="nameBasic" class="form-label">Judul</label>
+                                                    <input type="text" name="judul" class="form-control" placeholder="Judul surat" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="nameBasic" class="form-label">Deskripsi</label>
+                                                    <textarea name="deskripsi" rows="3" class="form-control" placeholder="Deskripsi surat"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2">
+                                                <div class="col mb-0">
+                                                    <label for="emailBasic" class="form-label">Pengirim</label>
+                                                    <input type="text" name="pengirim" class="form-control" placeholder="Nama pengirim" />
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label for="dobBasic" class="form-label">Tujuan</label>
+                                                    <input type="text" name="tujuan" class="form-control" placeholder="Tujuan surat" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="nameBasic" class="form-label">Tanggal</label>
+                                                    <input type="date" name="tanggal" class="form-control" placeholder="Judul surat" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                Tutup
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         <div class="row">
-                            <!-- Order Statistics -->
-
-                            <!--/ Order Statistics -->
-
-                            <!-- Expense Overview -->
-
-                            <!--/ Expense Overview -->
-
-                            <!-- Transactions -->
-
-                            <!--/ Transactions -->
                         </div>
                     </div>
                     <!-- / Content -->
