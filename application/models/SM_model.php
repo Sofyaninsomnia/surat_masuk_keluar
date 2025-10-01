@@ -9,7 +9,21 @@ class SM_model extends CI_Model
     }
     public function get()
     {
-        $query = $this->db->get('surat_masuk');
+        $this->db->select('sm.*,');
+        $this->db->from('surat_masuk sm');
+        $this->db->order_by('sm.tanggal', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+      public function get_filtered($start_date, $end_date)
+    {
+        $this->db->select('sm.*');
+        $this->db->from('surat_masuk sm');
+        $this->db->where('tanggal >=', $start_date);
+        $this->db->where('tanggal <=', $end_date);
+        $this->db->order_by('sm.tanggal', 'DESC');
+        $query = $this->db->get();
         return $query->result();
     }
 
@@ -35,5 +49,16 @@ class SM_model extends CI_Model
     {
         $this->db->where('id', $id); 
         return $this->db->delete('surat_masuk'); 
+    }
+
+        public  function get_keyword($keyword){
+        $this->db->select('*');
+        $this->db->from('surat_masuk');
+        $this->db->like('judul', $keyword);
+        $this->db->or_like('deskripsi', $keyword);
+        $this->db->or_like('pengirim', $keyword);
+        $this->db->or_like('tujuan', $keyword);
+        $this->db->or_like('tanggal', $keyword);
+        return $this->db->get()->result();
     }
 }

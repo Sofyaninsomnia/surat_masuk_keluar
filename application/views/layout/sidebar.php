@@ -52,7 +52,7 @@
                     </svg>
                 </span>
             </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2">Arsip Surat</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -65,27 +65,30 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboards -->
-        <li class="menu-item active open">
-            <a href="<?= base_url()?>" class="menu-link ">
+
+        <li class="menu-item <?= $this->uri->segment(1) == '' ? 'active open' : '' ?>">
+            <a href="<?= base_url() ?>" class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
                 <div class="text-truncate" data-i18n="Dashboards">Dashboard</div>
             </a>
         </li>
 
-        <!-- Layouts -->
-        <li class="menu-item">
-            <a href="<?= base_url('index.php/Surat_masuk')?>" class="menu-link ">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Main Menu</span>
+        </li>
+
+        <li class="menu-item <?= $this->uri->segment(1) == 'Surat_masuk' ? 'active open' : '' ?>">
+            <a href="<?= base_url('Surat_masuk') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-envelope"></i>
                 <div class="text-truncate" data-i18n="surat_masuk">Surat masuk</div>
             </a>
         </li>
 
-        <!-- Front Pages -->
-        <li class="menu-item">
-            <a href="<?= base_url('index.php/Surat_keluar')?>" class="menu-link ">
-                <i class="menu-icon tf-icons bx bx-store"></i>
+        <li class="menu-item <?= $this->uri->segment(1) == 'Surat_keluar' ? 'active open' : '' ?>">
+            <a href="<?= base_url('Surat_keluar') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-envelope"></i>
                 <div class="text-truncate" data-i18n="surat_keluar">Surat Keluar</div>
             </a>
         </li>
+
 </aside>

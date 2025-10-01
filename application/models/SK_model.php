@@ -7,9 +7,22 @@ class SK_model extends CI_Model
     {
         parent::__construct();
     }
-    public function get()
+    public function get() {
+        $this->db->select('sk.*,');
+        $this->db->from('surat_keluar sk');
+        $this->db->order_by('sk.tanggal', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_filtered($start_date, $end_date)
     {
-        $query = $this->db->get('surat_keluar');
+        $this->db->select('sk.*');
+        $this->db->from('surat_keluar sk');
+        $this->db->where('tanggal >=', $start_date);
+        $this->db->where('tanggal <=', $end_date);
+        $this->db->order_by('sk.tanggal', 'DESC');
+        $query = $this->db->get();
         return $query->result();
     }
 
