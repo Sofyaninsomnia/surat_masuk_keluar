@@ -3,8 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 require_once APPPATH . 'third_party/dompdf/autoload.inc.php';
 
- use Dompdf\Dompdf;
- use Dompdf\Options;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Surat_masuk extends CI_Controller
 {
@@ -13,13 +13,16 @@ class Surat_masuk extends CI_Controller
         parent::__construct();
         $this->load->model('SM_model');
         $this->load->library('form_validation');
+        $this->load->library('upload');
         if (!$this->session->userdata('logged_in')) {
-            redirect('auth'); // Ganti 'auth' dengan controller login Anda
+            redirect('auth'); 
         }
     }
 
     public function index()
     {
+        var_dump($this->session->flashdata());
+        die;
         $data['surat_masuk'] = $this->SM_model->get();
 
         $this->load->view('layout/header');
@@ -45,20 +48,20 @@ class Surat_masuk extends CI_Controller
         } else {
 
             if (!empty($_FILES['file_surat']['name'])) {
-                $config['upload_path']   = './uploads/surat_masuk/'; 
-                $config['allowed_types'] = 'pdf|doc|docx|jpg|jpeg|png'; 
+                $config['upload_path']   = './uploads/surat_masuk/';
+                $config['allowed_types'] = 'pdf|doc|docx|jpg|jpeg|png';
                 $config['max_size']      = 20048;
-                $config['encrypt_name']  = TRUE; 
+                $config['encrypt_name']  = TRUE;
                 $this->load->library('upload', $config);
 
                 if (!$this->upload->do_upload('file_surat')) {
                     $error = $this->upload->display_errors();
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload gagal: ' . strip_tags($error) . '</div>');
                     redirect('surat_masuk');
-                    return; 
+                    return;
                 } else {
                     $upload_data = $this->upload->data();
-                    $file_name = $upload_data['file_name']; 
+                    $file_name = $upload_data['file_name'];
                 }
             }
 
@@ -71,12 +74,10 @@ class Surat_masuk extends CI_Controller
                 'file_surat' => $file_name
             );
 
-            // Panggil method insert dari model untuk menyimpan data
-            $this->SM_model->insert($data); // Pastikan SM_model memiliki method insert
+            $this->SM_model->insert($data);
 
-            // Set flashdata untuk pesan sukses dan redirect
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambahkan!</div>');
-            redirect('surat_masuk'); // Redirect ke halaman daftar surat masuk
+            redirect('surat_masuk');
         }
     }
 
@@ -120,6 +121,7 @@ class Surat_masuk extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->edit($id);
         } else {
+
             $data = array(
                 'judul' => $this->input->post('judul'),
                 'deskripsi' => $this->input->post('deskripsi'),
@@ -127,6 +129,24 @@ class Surat_masuk extends CI_Controller
                 'tujuan' => $this->input->post('tujuan'),
                 'tanggal' => $this->input->post('tanggal')
             );
+
+            if (!empty($_FILES['file_surat']['name'])) {
+                $config['upload_path']          = './uploads/surat_masuk/';
+                $config['allowed_types']        = 'jpg|png|jpeg|pdf|doc|docx';
+                $config['max_size']             = 10080;
+                $config['file_name']            = 'file_name' . time();
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file_surat')) {
+                    $upload_data = $this->upload->data();
+                    $data['file_surat'] = $upload_data['file_name'];
+                } else {
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
+                    $this->edit($id);
+                }
+            }
+
             $this->SM_model->update($id, $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil diperbarui!</div>');
             redirect('surat_masuk');
@@ -170,7 +190,8 @@ class Surat_masuk extends CI_Controller
         $dompdf->stream("laporan_surat_masuk.pdf", array('attachment'));
     }
 
-        public function search() {
+    public function search()
+    {
         $keyword = $this->input->post('keyword');
         $data['surat_masuk'] = $this->SM_model->get_keyword($keyword);
         $this->load->view('layout/header');

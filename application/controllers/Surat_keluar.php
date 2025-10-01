@@ -48,7 +48,7 @@ class Surat_keluar extends CI_Controller
             if (!empty($_FILES['file_surat']['name'])) {
                 $config['upload_path']   = './uploads/surat_keluar/';
                 $config['allowed_types'] = 'pdf|doc|docx|jpg|jpeg|png';
-                $config['max_size']      = 20048; // ~20MB
+                $config['max_size']      = 20048; 
                 $config['encrypt_name']  = TRUE;
 
                 $this->load->library('upload', $config);
@@ -70,7 +70,7 @@ class Surat_keluar extends CI_Controller
                 'pengirim'   => $this->input->post('pengirim'),
                 'tujuan'     => $this->input->post('tujuan'),
                 'tanggal'    => $this->input->post('tanggal'),
-                'file_surat' => $file_name // Aman karena sudah ada default null
+                'file_surat' => $file_name 
             );
 
             $this->SK_model->insert($data);

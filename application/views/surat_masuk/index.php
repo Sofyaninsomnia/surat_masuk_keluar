@@ -89,7 +89,7 @@
                                                         -
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><a href="<?php echo base_url('index.php/Surat_masuk/hapus/' . $sm->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus kategori ini?');"><i class="bx bx-trash"></i></a>
+                                                <td><a href="<?php echo base_url('index.php/Surat_masuk/hapus/' . $sm->id); ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');"><i class="bx bx-trash"></i></a>
                                                     <a href="<?php echo base_url('index.php/Surat_masuk/edit/' . $sm->id); ?>" class="btn btn-sm btn-info"><i class="bx bx-edit"></i></a>
                                                 </td>
                                             </tr>

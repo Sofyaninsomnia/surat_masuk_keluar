@@ -66,11 +66,4 @@ class Auth extends CI_Controller {
         redirect('auth');
     }
 
-    // Fungsi hash_password ini tidak lagi relevan jika Anda tidak menggunakan hashing
-    // Anda bisa menghapusnya atau mengabaikannya.
-    public function hash_password($password)
-    {
-        // Fungsi ini akan mengembalikan plain text password jika Anda tidak ingin hash
-        return $password; // TIDAK DIREKOMENDASIKAN UNTUK PRODUKSI
-    }
 }

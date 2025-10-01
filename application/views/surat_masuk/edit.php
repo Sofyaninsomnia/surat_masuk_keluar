@@ -41,7 +41,7 @@
                                                 <a href="<?= base_url('uploads/surat_masuk/' . htmlspecialchars($surat_masuk->file_surat)); ?>" target="_blank">Lihat File</a>
                                             </div>
                                         <?php endif; ?>
-                                        <input type="file" name="cover" class="form-control">
+                                        <input type="file" name="file_surat" class="form-control">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Update Data</button>
                                     <a href="<?= base_url('index.php/Surat_masuk') ?>" class="btn btn-secondary">Batal</a>
