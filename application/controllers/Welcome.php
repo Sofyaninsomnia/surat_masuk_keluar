@@ -7,7 +7,7 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		if (!$this->session->userdata('logged_in')) {
-			redirect('auth'); // Redirect to the login page if not logged in
+			redirect('index.php/auth');
 		}
 	}
 

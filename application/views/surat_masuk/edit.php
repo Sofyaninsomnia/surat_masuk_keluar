@@ -15,8 +15,16 @@
                                     <input type="hidden" name="id" value="<?= $surat_masuk->id ?>">
 
                                     <div class="mb-3">
+                                        <label for="nomor" class="form-label">Nomor Surat</label>
+                                        <input type="text" class="form-control" id="nomor" name="nomor" value="<?= $surat_masuk->nomor ?>" required>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="judul" class="form-label">Judul</label>
                                         <input type="text" class="form-control" id="judul" name="judul" value="<?= $surat_masuk->judul ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jenis" class="form-label">Jenis Surat</label>
+                                        <input type="text" class="form-control" id="jenis" name="jenis" value="<?= $surat_masuk->jenis ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="deskripsi" class="form-label">Deskripsi</label>

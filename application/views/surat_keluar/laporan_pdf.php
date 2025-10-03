@@ -32,7 +32,9 @@
 	<table>
 		<tr>
 			<th>NO</th>
+			<th>NOMOR SURAT</th>
 			<th>JUDUL</th>
+			<th>JENIS SURAT</th>
 			<th>DESKRIPSI</th>
 			<th>PENGIRIM</th>
 			<th>TUJUAN</th>
@@ -45,7 +47,9 @@
 
 			<tr>
 				<td><?php echo $no++ ?></td>
+				<td><?php echo $mk->nomor ?></td>
 				<td><?php echo $mk->judul ?></td>
+				<td><?php echo $mk->jenis ?></td>
 				<td><?php echo $mk->deskripsi ?></td>
 				<td><?php echo $mk->pengirim ?></td>
 				<td><?php echo $mk->tujuan ?></td>

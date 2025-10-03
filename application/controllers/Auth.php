@@ -46,11 +46,11 @@ class Auth extends CI_Controller {
                     redirect('');
                 } else {
                     $this->session->set_flashdata('error', 'Username atau Password salah.');
-                    redirect('auth');
+                    redirect('index.php/auth');
                 }
             } else {
                 $this->session->set_flashdata('error', 'Username atau Password salah.');
-                redirect('auth');
+                redirect('index.php/auth');
             }
         }
     }
@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
         $this->session->unset_userdata('email');
         $this->session->sess_destroy();
 
-        redirect('auth');
+        redirect('index.php/auth');
     }
 
 }

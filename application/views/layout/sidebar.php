@@ -78,14 +78,14 @@
         </li>
 
         <li class="menu-item <?= $this->uri->segment(1) == 'Surat_masuk' ? 'active open' : '' ?>">
-            <a href="<?= base_url('Surat_masuk') ?>" class="menu-link">
+            <a href="<?= base_url('index.php/Surat_masuk') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-envelope"></i>
-                <div class="text-truncate" data-i18n="surat_masuk">Surat masuk</div>
+                <div class="text-truncate" data-i18n="surat_masuk">Surat Masuk</div>
             </a>
         </li>
 
         <li class="menu-item <?= $this->uri->segment(1) == 'Surat_keluar' ? 'active open' : '' ?>">
-            <a href="<?= base_url('Surat_keluar') ?>" class="menu-link">
+            <a href="<?= base_url('index.php/Surat_keluar') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-envelope"></i>
                 <div class="text-truncate" data-i18n="surat_keluar">Surat Keluar</div>
             </a>

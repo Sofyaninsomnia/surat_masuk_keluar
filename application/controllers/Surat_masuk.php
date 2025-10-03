@@ -13,16 +13,15 @@ class Surat_masuk extends CI_Controller
         parent::__construct();
         $this->load->model('SM_model');
         $this->load->library('form_validation');
-        $this->load->library('upload');
         if (!$this->session->userdata('logged_in')) {
-            redirect('auth'); 
+            redirect('index.php/auth'); 
         }
     }
 
     public function index()
     {
-        var_dump($this->session->flashdata());
-        die;
+        // var_dump($this->session->flashdata());
+        // die;
         $data['surat_masuk'] = $this->SM_model->get();
 
         $this->load->view('layout/header');
@@ -33,7 +32,9 @@ class Surat_masuk extends CI_Controller
 
     public function tambah()
     {
+        $this->form_validation->set_rules('nomor', 'Nomor', 'required|max_length[20]');
         $this->form_validation->set_rules('judul', 'Judul', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('pengirim', 'Pengirim', 'required|trim|max_length[100]');
         $this->form_validation->set_rules('tujuan', 'Tujuan', 'required|trim|max_length[255]');
@@ -52,12 +53,14 @@ class Surat_masuk extends CI_Controller
                 $config['allowed_types'] = 'pdf|doc|docx|jpg|jpeg|png';
                 $config['max_size']      = 20048;
                 $config['encrypt_name']  = TRUE;
+
+
                 $this->load->library('upload', $config);
 
                 if (!$this->upload->do_upload('file_surat')) {
                     $error = $this->upload->display_errors();
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload gagal: ' . strip_tags($error) . '</div>');
-                    redirect('surat_masuk');
+                    redirect('index.php/surat_masuk');
                     return;
                 } else {
                     $upload_data = $this->upload->data();
@@ -66,7 +69,9 @@ class Surat_masuk extends CI_Controller
             }
 
             $data = array(
+                'nomor'      => $this->input->post('nomor'),
                 'judul'      => $this->input->post('judul'),
+                'jenis'      => $this->input->post('jenis'),
                 'deskripsi'  => $this->input->post('deskripsi'),
                 'pengirim'   => $this->input->post('pengirim'),
                 'tujuan'     => $this->input->post('tujuan'),
@@ -77,17 +82,13 @@ class Surat_masuk extends CI_Controller
             $this->SM_model->insert($data);
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambahkan!</div>');
-            redirect('surat_masuk');
+            redirect('index.php/Surat_masuk');
         }
     }
 
     public function detail($id)
     {
         $data['surat_masuk'] = $this->SM_model->get_by_id($id);
-
-        if (!$data['surat_masuk']) {
-            show_404();
-        }
 
         $this->load->view('layout/header');
         $this->load->view('layout/sidebar');
@@ -113,6 +114,7 @@ class Surat_masuk extends CI_Controller
         $id = $this->input->post('id');
 
         $this->form_validation->set_rules('judul', 'Judul', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('pengirim', 'Pengirim', 'required|trim');
         $this->form_validation->set_rules('tujuan', 'Tujuan', 'required|trim');
@@ -124,6 +126,7 @@ class Surat_masuk extends CI_Controller
 
             $data = array(
                 'judul' => $this->input->post('judul'),
+                'jenis' => $this->input->post('jenis'),
                 'deskripsi' => $this->input->post('deskripsi'),
                 'pengirim' => $this->input->post('pengirim'),
                 'tujuan' => $this->input->post('tujuan'),
@@ -137,6 +140,7 @@ class Surat_masuk extends CI_Controller
                 $config['file_name']            = 'file_name' . time();
 
                 $this->upload->initialize($config);
+                $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('file_surat')) {
                     $upload_data = $this->upload->data();
@@ -149,7 +153,7 @@ class Surat_masuk extends CI_Controller
 
             $this->SM_model->update($id, $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil diperbarui!</div>');
-            redirect('surat_masuk');
+            redirect('index.php/Surat_masuk');
         }
     }
 
@@ -157,7 +161,7 @@ class Surat_masuk extends CI_Controller
     {
         $this->SM_model->delete($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus!</div>');
-        redirect('surat_masuk');
+        redirect('index.php/Surat_masuk');
     }
 
 

@@ -14,7 +14,7 @@ class Surat_keluar extends CI_Controller
         $this->load->library('form_validation');
 
         if (!$this->session->userdata('logged_in')) {
-            redirect('auth'); // Ganti 'auth' dengan controller login Anda
+            redirect('index.php/auth');
         }
     }
 
@@ -30,7 +30,9 @@ class Surat_keluar extends CI_Controller
 
     public function tambah()
     {
+        $this->form_validation->set_rules('nomor', 'Nomor', 'required|max_length[20]');
         $this->form_validation->set_rules('judul', 'Judul', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('pengirim', 'Pengirim', 'required|trim|max_length[100]');
         $this->form_validation->set_rules('tujuan', 'Tujuan', 'required|trim|max_length[255]');
@@ -56,7 +58,7 @@ class Surat_keluar extends CI_Controller
                 if (!$this->upload->do_upload('file_surat')) {
                     $error = $this->upload->display_errors();
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Upload gagal: ' . strip_tags($error) . '</div>');
-                    redirect('surat_keluar');
+                    redirect('index.php/surat_keluar');
                     return;
                 } else {
                     $upload_data = $this->upload->data();
@@ -65,7 +67,9 @@ class Surat_keluar extends CI_Controller
             }
 
             $data = array(
+                'nomor'      => $this->input->post('nomor'),
                 'judul'      => $this->input->post('judul'),
+                'jenis'      => $this->input->post('jenis'),
                 'deskripsi'  => $this->input->post('deskripsi'),
                 'pengirim'   => $this->input->post('pengirim'),
                 'tujuan'     => $this->input->post('tujuan'),
@@ -112,7 +116,9 @@ class Surat_keluar extends CI_Controller
     {
         $id = $this->input->post('id');
 
+        $this->form_validation->set_rules('nomor', 'Nomor', 'required|trim|max_length[20]');
         $this->form_validation->set_rules('judul', 'Judul', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'Jenis', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('pengirim', 'Pengirim', 'required|trim');
         $this->form_validation->set_rules('tujuan', 'Tujuan', 'required|trim');
@@ -122,7 +128,9 @@ class Surat_keluar extends CI_Controller
             $this->edit($id);
         } else {
             $data = array(
+                'nomor' => $this->input->post('nomor'),
                 'judul' => $this->input->post('judul'),
+                'jenis' => $this->input->post('jenis'),
                 'deskripsi' => $this->input->post('deskripsi'),
                 'pengirim' => $this->input->post('pengirim'),
                 'tujuan' => $this->input->post('tujuan'),
